@@ -18,7 +18,7 @@ public class OutClass {
             }
         }
 
-        public synchronized void method2() {
+        public synchronized void method2() { //持有当前对象的锁
             String threadName = Thread.currentThread().getName();
 
             System.out.println(threadName + " 进入InnerClass1类中的method2方法");

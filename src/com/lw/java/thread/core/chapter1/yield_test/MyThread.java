@@ -1,5 +1,8 @@
 package com.lw.java.thread.core.chapter1.yield_test;
 
+/**
+ * yield() 方法：放弃当前所占有的cpu资源，让其他线程去使用
+ */
 public class MyThread extends Thread {
     @Override
     public void run() {
