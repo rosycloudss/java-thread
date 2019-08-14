@@ -17,15 +17,19 @@
 2. 线程状态转变
 
     1） 创建一个新的线程对象后，调用start方法，系统为线程分配cpu资源，使其处于Runnable（与运行）状态
+  
     2） 如果线程抢占到了cpu资源，线程就处于Running(运行)状态
+   
     3） Runnable 状态和 Running 状态可相互切换，因为有可能线程运行一段时间后，有其他优先级更高的线程抢占了CPU资源，此时线程就
         从 Running 状态变成 Runnable 状态
+        
         线程进入 Runnable 状态大体分为如下5种情况：
             调用sleep() 方法后经过的时间超过了指定的休眠时间
             线程调用的阻塞IO已经返回，阻塞方法执行完毕
             线程成功的获得了试图同步的监视器
             线程正在等待某个通知，其他线程发出通知。
             处于挂起状态的线程调用了resume恢复方法
+            
     4） Blocked 是阻塞的意思，例如遇到一个IO操作，此时CPU处于空闲状态，可能会转而把cpu时间片分配给其他线程，这时也可以称为“暂停”状态。
         Blocked 状态结束后，进入Runnable状态，等待系统重新分配资源
         出现阻塞的情况大体如下5种：
@@ -47,5 +51,24 @@
   当线程呈wait状态时，调用线程对象的interrupt() 方法会出现 InterruptedException异常
 
   wait(long) ：等待某一段时间内是否有线程对锁进行唤醒，如果超过这个时间自动唤醒
+  使用wait/notify模式时，当wait等待的条件发生变化时，容易造成程序逻辑的混乱
 
+通过管道进行线程间通信
+    管道流是一种特殊的流，用于在不同线程间直接传送数据，
+    一个线程发送数据到输出管道中，另一个线程从输入管道中读数据
+    管道类
+        PipedInputStream 和 PipedOutputStream
+        PipedReader 和 PipedWriter
 
+    join(): 使所属线程的对象X正常执行run()方法，而使当前线程z进行无限期的阻塞，等待线程x销毁后再继续执行线程z后面的代码
+    jion和synchronizd的区别
+        join在内部使用wait()方法进行等待
+        synchronized 关键字使用的是“对象监视器”原理作为同步
+
+    在join过程中，如果当前线程对象被中断，则当前线程出现异常，但是调用join方法的线程依然正常运行
+
+    join(long):设定等待的时间
+
+    join(long) 和 sleep(long)的区别：
+        join(long)的功能是在内部使用wait(long)方法来实现，所以join(long) 方法具有释放锁的特点
+        sleep(long)不释放锁
