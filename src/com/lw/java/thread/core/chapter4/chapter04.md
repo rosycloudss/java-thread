@@ -2,13 +2,13 @@ ReentrantLock 类
     ReentranLock 类可以实现线程之间同步互斥，还具有嗅探锁定、多路分支通知等功能。
     
 Condition: 
-           ReentrantLock 也可以实现等待/通知模式，需要借助Condition对象
-           Lock对象中可以创建多个Condition(对象监视器)实例，线程对象可以注册在指定的Condition中，从而有选择性地进行线程通知，在调度线程上更加灵活
-           synchronized就相当于整个Lock对象中只有一个单一的Condition对象，所有的线程都注册在它一个对象上。
-           Object 类中的wait()方法相当于Condition类中的await()方法
-           Object类中的wait(long timeout)方法相当于Condition类中的await(long time,TimeUnit unit)方法
-           Object 类中的notify()方法相当于Condition类中的sig*__*nal()方法
-           Object 类中的notifyAll()方法相当于Condition类中的signalAll()方法
+         ReentrantLock 也可以实现等待/通知模式，需要借助Condition对象
+         Lock对象中可以创建多个Condition(对象监视器)实例，线程对象可以注册在指定的Condition中，从而有选择性地进行线程通知，在调度线程上更加灵活
+         synchronized就相当于整个Lock对象中只有一个单一的Condition对象，所有的线程都注册在它一个对象上。
+         Object 类中的wait()方法相当于Condition类中的await()方法
+         Object类中的wait(long timeout)方法相当于Condition类中的await(long time,TimeUnit unit)方法
+         Object 类中的notify()方法相当于Condition类中的signal()方法
+         Object 类中的notifyAll()方法相当于Condition类中的signalAll()方法
            
 公平锁和非公平锁
     锁lock分为“公平锁” 和 “非公平锁”
@@ -26,9 +26,9 @@ boolean hasWaiters(Condition condition): 查询是否有线程正在等待与此
 boolean isFair(): 判断是不是公平锁
 boolean isHeldByCurrentThread()：查询当前线程是否保持此锁定
 boolean isLocked(): 查询此锁定是否由任意线程保持
-void lockInterruptibly(): 如果当前线程未被中断，则获取锁定，如果已经被中断则抛出异常    lock():无论是否中断都获取锁定
+void lockInterruptibly(): 如果当前线程未被中断，则获取锁定，如果已经被中断则抛出异常    lock():无论是否中断都获取锁定，
 boolean tryLock()： 仅在调用时锁定未被另一个线程保持的情况下，才获取该锁定
 boolean tryLock(long timeout,TimeUnit unit):如果锁定在给定等待时间内没有被另一个线程保持，且当前线程未被中断，则获取该锁定。
+condition.awaitUninterruptibly(): 使当前线程等待，当发生中断时不产生异常
 
-
-
+awaitUntil(long)：说明在等待时间到达前，可以被其他线程提前唤醒
