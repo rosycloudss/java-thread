@@ -17,6 +17,7 @@ public class Test {
 
         int[] array = {1, 41,4, 1, 10, 45, 16, 20};
         Sort.insertionSort(array,false);
+       // 🙂
 
 
     }
