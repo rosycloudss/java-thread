@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Arrays;
+
 public class Sort {
 
     /**
@@ -8,10 +10,10 @@ public class Sort {
      * @param array  要排序的数组
      * @param isDesc 是否降序
      */
-    public static void bubbleSort(int[] array, boolean isDesc) {
+    public static int[] bubbleSort(int[] array, boolean isDesc) {
         int len;
-        if (array == null || (len = array.length) == 0) {
-            return;
+        if (array == null || (len = array.length) < 2) {
+            return array;
         }
         int sorted = 0; // sorted 之前的元素已经拍好序了
         for (int i = 0; i < len - 1; i++) {
@@ -35,6 +37,7 @@ public class Sort {
             }
 //            printAll(array);
         }
+        return array;
     }
 
     /**
@@ -46,12 +49,13 @@ public class Sort {
      * @param array
      * @param isDesc 是否降序排序
      */
-    public static void cocktailSort(int[] array, boolean isDesc) {
-        if (array == null || array.length == 0) {
-            return;
+    public static int[] cocktailSort(int[] array, boolean isDesc) {
+        int len;
+        if (array == null || (len = array.length) < 2) {
+            return array;
         }
         int begin = 0;
-        int end = array.length - 1;
+        int end = len - 1;
         while (begin < end) {
             int newBegin = end;
             int newEnd = begin;
@@ -90,6 +94,7 @@ public class Sort {
             begin = newBegin + 1;
 //            printAll(array);
         }
+        return array;
     }
 
     /**
@@ -98,10 +103,10 @@ public class Sort {
      * @param array
      * @param isDesc
      */
-    public static void insertionSort(int[] array, boolean isDesc) {
+    public static int[] insertionSort(int[] array, boolean isDesc) {
         int len;
-        if (array == null || (len = array.length) == 0) {
-            return;
+        if (array == null || (len = array.length) < 2) {
+            return array;
         }
         for (int i = 1; i < len; i++) {
             int temp = array[i];
@@ -122,6 +127,118 @@ public class Sort {
             array[insertIndex] = temp;
 //            printAll(array);
         }
+        return array;
+    }
+
+    /**
+     * 希尔排序
+     *
+     * @param array
+     * @param isDesc
+     */
+    public static int[] shellSort(int[] array, boolean isDesc) {
+        int len;
+        if (array == null || (len = array.length) < 2) {
+            return array;
+        }
+        for (int gap = len / 2; gap > 0; gap = gap / 2) {
+            for (int i = gap; i < len; i++) {
+                int j = i;
+                int current = array[i];
+                while (j - gap >= 0 && (isDesc ? current > array[j - gap] : current < array[j - gap])) {
+                    array[j] = array[j - gap];
+                    j -= gap;
+                }
+                array[j] = current;
+            }
+        }
+        return array;
+    }
+
+    /**
+     * 归并排序
+     * 归并排序是一种稳定的排序方法。和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，\
+     * 因为始终都是O(nlogn）的时间复杂度。代价是需要额外的内存空间。
+     *
+     * @param array
+     * @param isDesc
+     */
+    public static int[] mergeSort(int[] array, boolean isDesc) {
+        int len;
+        if (array == null || (len = array.length) < 2) {
+            return array;
+        }
+        int[] left = Arrays.copyOfRange(array, 0, len / 2);
+        int[] right = Arrays.copyOfRange(array, len / 2, len);
+        return merge(mergeSort(left, isDesc), mergeSort(right, isDesc), isDesc);
+    }
+
+    /**
+     * 归并
+     *
+     * @param left
+     * @param right
+     * @param isDesc
+     * @return
+     */
+    private static int[] merge(int[] left, int[] right, boolean isDesc) {
+        int leftIndex = 0;
+        int rightIndex = 0;
+        int index = 0;
+        int[] array = new int[left.length + right.length];
+        while (leftIndex < left.length && rightIndex < right.length) {
+            if (!isDesc) { // 升序
+                if (left[leftIndex] <= right[rightIndex]) {
+                    array[index++] = left[leftIndex++];
+                } else {
+                    array[index++] = right[rightIndex++];
+                }
+            } else { // 降序
+                if (left[leftIndex] >= right[rightIndex]) {
+                    array[index++] = left[leftIndex++];
+                } else {
+                    array[index++] = right[rightIndex++];
+                }
+            }
+        }
+        while (leftIndex < left.length) {
+            array[index++] = left[leftIndex++];
+        }
+        while (rightIndex < right.length) {
+            array[index++] = right[rightIndex++];
+        }
+        return array;
+    }
+
+    /**
+     * 快排序
+     *
+     * @param array
+     * @param isDesc
+     * @return
+     */
+    public static int[] quickSort(int[] array, boolean isDesc) {
+        if (array == null || array.length < 2) {
+            return array;
+        }
+        return doQuickSort(array, 0, array.length, isDesc);
+    }
+
+    public static int[] doQuickSort(int[] array, int start, int end, boolean isDesc) {
+
+        if (start < end) {
+
+        }
+        return array;
+    }
+
+
+    private static int partition(int[] array, int start, int end, boolean isDesc) {
+        int pivot = start, index = pivot + 1;
+        for (int i = index;i < end;i++){
+
+        }
+        return index - 1;
     }
 
     /**
@@ -137,11 +254,11 @@ public class Sort {
         array[j] = temp;
     }
 
-    private static void printAll(int[] array) {
+    public static void printAll(int[] array) {
         for (Integer i : array) {
             System.out.print(i + " ");
         }
         System.out.println();
-        ;
+
     }
 }

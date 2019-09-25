@@ -31,7 +31,7 @@ public class Solution_452 {
         Arrays.sort(points, new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
-                return o1[1]-o2[1];
+                return o1[0]-o2[0];
             }
         });
         int i = 1;
@@ -69,8 +69,7 @@ public class Solution_452 {
 
     public static void main(String[] args) {
         Solution_452 solution_452 = new Solution_452();
-
-        int[][] points = {{1, 2}, {3, 4}, {5, 6}, {7, 8}};
+        int[][] points = {{1, 2},  {5, 6},{3, 4}, {7, 8}};
         System.out.println(solution_452.findMinArrowShots(points));
     }
 }

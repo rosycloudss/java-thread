@@ -10,10 +10,12 @@ public class Run {
     public static void main(String[] args) {
         try {
             MyThread thread = new MyThread();
+            MyThread thread2 = new MyThread();
             thread.setDaemon(true);
             MyThread thread1 = new MyThread();
             thread.start();
             thread1.start();
+            thread2.start();
             Thread.sleep(5000);
             System.out.println("结束执行");
         } catch (InterruptedException e) {

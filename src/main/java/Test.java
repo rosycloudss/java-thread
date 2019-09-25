@@ -1,4 +1,5 @@
 import com.lw.java.thread.core.chapter3.p_r_test.C;
+import leetcode.Solution_5197;
 import util.Sort;
 
 import java.util.HashMap;
@@ -15,10 +16,12 @@ public class Test {
 //        concurrentHashMap.put(null,null);
 
 
-        int[] array = {1, 41,4, 1, 10, 45, 16, 20};
-        Sort.insertionSort(array,false);
-       // 🙂
-
+        int[] array = {1, 41, 4, 1, 10, 45, 16, 20};
+//        Sort.insertionSort(array,false);
+        // 🙂
+//        Sort.shellSort(array, true);
+        array = Sort.mergeSort(array,true);
+        Sort.printAll(array);
 
     }
 }
