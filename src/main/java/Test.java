@@ -20,8 +20,12 @@ public class Test {
 //        Sort.insertionSort(array,false);
         // 🙂
 //        Sort.shellSort(array, true);
-        array = Sort.mergeSort(array,true);
+//        array = Sort.mergeSort(array,true);
+
+        array = Sort.quickSort(array,true);
         Sort.printAll(array);
+
+
 
     }
 }

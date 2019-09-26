@@ -132,6 +132,7 @@ public class Sort {
 
     /**
      * 希尔排序
+     * 不稳定  O(N^3/2 )
      *
      * @param array
      * @param isDesc
@@ -221,24 +222,44 @@ public class Sort {
         if (array == null || array.length < 2) {
             return array;
         }
-        return doQuickSort(array, 0, array.length, isDesc);
+        return doQuickSort(array, 0, array.length - 1, isDesc);
     }
 
-    public static int[] doQuickSort(int[] array, int start, int end, boolean isDesc) {
-
+    private static int[] doQuickSort(int[] array, int start, int end, boolean isDesc) {
         if (start < end) {
-
+            int index = partition(array, start, end, isDesc);
+            doQuickSort(array, start, index, isDesc);
+            doQuickSort(array, index + 1, end, isDesc);
         }
         return array;
     }
 
-
     private static int partition(int[] array, int start, int end, boolean isDesc) {
-        int pivot = start, index = pivot + 1;
-        for (int i = index;i < end;i++){
+        int temp = array[start];
+        while (start < end) {
+            if (!isDesc) { // 升序
+                while (start < end && array[end] >= temp) {
+                    end--;
+                }
+                array[start] = array[end];
+                while (start < end && array[start] <= temp) {
+                    start++;
+                }
+                array[end] = array[start];
+            } else { // 降序
+                while (start < end && array[end] <= temp) {
+                    end--;
+                }
+                array[start] = array[end];
+                while (start < end && array[start] >= temp) {
+                    start++;
+                }
+                array[end] = array[start];
 
+            }
         }
-        return index - 1;
+        array[start] = temp;
+        return start;
     }
 
     /**
