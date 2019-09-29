@@ -20,7 +20,7 @@ public class Solution_127 {
         // 创建图
         Map<String, ArrayList<String>> gra = new HashMap<>();
         for (int i = 0; i < wordList.size(); i++) {
-            for (int j = i + 1; j < wordList.size(); j++) {
+            for (int j = 0; j < wordList.size(); j++) {
                 if (connect(wordList.get(i), wordList.get(j)) == 1) {
                     ArrayList<String> list = gra.get(wordList.get(i));
                     if (list == null) {
@@ -47,7 +47,7 @@ public class Solution_127 {
                     if (str.equals(endWord)) {
                         min = Math.min(pair.getValue() + 1, min);
                     } else {
-                        if (map.get(str) == false) {
+                        if (map.get(str) == null) {
                             queue.push(new Pair<>(str, pair.getValue() + 1));
                             map.put(str, true);
                         }
@@ -72,9 +72,14 @@ public class Solution_127 {
     }
 
     public static void main(String[] args) {
-        String beginWord = "hit",
-                endWord = "cog";
-        List<String> wordList = Arrays.asList(new String[]{"hot", "dot", "dog", "lot", "log", "cog"});
+        String beginWord = "hit", endWord = "cog";
+        List<String> wordList = new ArrayList<>();
+        wordList.add("hot");
+        wordList.add("dot");
+        wordList.add("dog");
+        wordList.add("lot");
+        wordList.add("log");
+        wordList.add("cog");
         System.out.println(new Solution_127().ladderLength(beginWord, endWord, wordList));
 
     }
