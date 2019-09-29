@@ -72,3 +72,7 @@
     join(long) 和 sleep(long)的区别：
         join(long)的功能是在内部使用wait(long)方法来实现，所以join(long) 方法具有释放锁的特点
         sleep(long)不释放锁
+
+ThreadLocal
+    ThreadLocal的实例代表了一个线程局部的变量，每条线程都只能看到自己的值，并不会意识到其它的线程中也存在该变量。
+    它采用采用空间来换取时间的方式，解决多线程中相同变量的访问冲突问题。

@@ -33,7 +33,6 @@ public class InterruptThread {
             Thread.sleep(1);
             thread.interrupt();
             System.out.println("是否停止1？=" + thread.interrupted());
-
             System.out.println("是否停止2？=" + thread.interrupted());
         } catch (InterruptedException e) {
             e.printStackTrace();

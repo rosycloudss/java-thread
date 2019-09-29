@@ -6,7 +6,10 @@ public class Run {
         MyService service = new MyService();
         ThreadA a = new ThreadA(service);
         a.start();
+        ThreadB b = new ThreadB(service);
+        b.start();
         Thread.sleep(3_000);
-        service.singnal();
+        service.singnal('1');
+        service.singnal('2');
     }
 }

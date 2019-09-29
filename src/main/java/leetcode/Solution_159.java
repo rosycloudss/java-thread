@@ -62,23 +62,24 @@ public class Solution_159 {
      * @return
      */
     public int lengthOfLongestSubstringTwoDistinct1(String s) {
+        if (s == null || s.length() < 1) {
+            return 0;
+        }
         int[] digits = new int[256];
         int left = 0, right = 0, max = 0, numDigit = 0;
         char[] chars = s.toCharArray();
         for (; right < chars.length; right++) {
             if (digits[chars[right]] == 0) {
                 numDigit++;
-                digits[chars[right]]++;
             }
-            if (numDigit > 2) {
-                while (numDigit > 2 && left < right) {
-                    if (--digits[chars[left]] == 0) {
-                        numDigit--;
-                    }
-                    left++;
+            digits[chars[right]]++;
+            while (numDigit > 2 && left <= right) {
+                if ((--digits[chars[left]]) == 0) {
+                    numDigit--;
                 }
+                left++;
             }
-            max = max > right - left + 1 ? max : right - left + 1;
+            max = Math.max(max, right - left + 1);
         }
         return max;
     }

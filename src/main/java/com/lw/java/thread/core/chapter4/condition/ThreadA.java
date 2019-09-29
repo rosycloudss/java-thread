@@ -9,6 +9,6 @@ public class ThreadA extends Thread {
 
     @Override
     public void run() {
-        service.waitMehtod();
+        service.waitMehtod('1');
     }
 }

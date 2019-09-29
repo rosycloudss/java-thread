@@ -16,9 +16,11 @@ Condition:
     非公平锁：是一种获取锁的抢占机制，是随机获得锁的，和公平锁不一样的就是先来的不一定先得到锁。可能造成某些线程一直拿不到锁
 
 int getHoldCount()：查询当前线程保持此锁定的个数，即调用lock() 方法的次数
-int getQueueLength()：返回正等待获取此锁定的线程估计数，比如有5个线程，1个线程首先执行lock()方法，那么在调用getQueueLength() 方法后返回值是4，说明有4个线程同时在等待lock的释放
-int getWaitQueueLength(Condition condition)：返回等待与此锁定相关的给定条件Condition的线程估计数；比如有5个线程，每个线程都执行了同一个condition对象的await()方法，
-    则调用getWaitQueueLength(Condition condition)方法返回的int值是5，即返回等待 condition.signal() 唤醒的线程的数量
+int getQueueLength()：返回正等待获取此锁定的线程估计数，比如有5个线程，1个线程首先执行lock()方法，那么在调用getQueueLength() 
+                      方法后返回值是4，说明有4个线程同时在等待lock的释放
+int getWaitQueueLength(Condition condition)：返回等待与此锁定相关的给定条件Condition的线程估计数；比如有5个线程，每个线程都执
+                      行了同一个condition对象的await()方法，则调用getWaitQueueLength(Condition condition)方法返回的int值是5，
+                      即返回等待 condition.signal() 唤醒的线程的数量
 boolean hasQueuedThread(Thread thread): 查询指定的线程是否正在等待获取此锁定
 boolean hasQueuedThreads(): 查询是否有线程正在等待获取此锁定
 boolean hasWaiters(Condition condition): 查询是否有线程正在等待与此锁定有关的condition条件
