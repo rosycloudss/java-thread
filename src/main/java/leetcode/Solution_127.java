@@ -14,15 +14,18 @@ public class Solution_127 {
         if (wordList == null || wordList.isEmpty()) {
             return 0;
         }
-
-        wordList.add(beginWord);
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
         int result = 0;
         // 创建图
         Map<String, ArrayList<String>> gra = new HashMap<>();
+
+        wordList.add(beginWord);
         for (int i = 0; i < wordList.size(); i++) {
+            ArrayList<String> list = gra.get(wordList.get(i));
             for (int j = 0; j < wordList.size(); j++) {
-                if (connect(wordList.get(i), wordList.get(j)) == 1) {
-                    ArrayList<String> list = gra.get(wordList.get(i));
+                if (connect(wordList.get(i), wordList.get(j)) == wordList.get(i).length() - 1) {
                     if (list == null) {
                         list = new ArrayList<>();
                         list.add(wordList.get(j));
@@ -33,6 +36,7 @@ public class Solution_127 {
                 }
             }
         }
+
 
         Map<String, Boolean> map = new HashMap<>(); //  已经访问过的
         LinkedList<Pair<String, Integer>> queue = new LinkedList<>();
@@ -56,7 +60,6 @@ public class Solution_127 {
             }
 
         }
-
         return min == Integer.MAX_VALUE ? 0 : min;
     }
 
@@ -81,7 +84,6 @@ public class Solution_127 {
         wordList.add("log");
         wordList.add("cog");
         System.out.println(new Solution_127().ladderLength(beginWord, endWord, wordList));
-
     }
 
 }
