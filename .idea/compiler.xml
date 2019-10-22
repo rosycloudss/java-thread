@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="java-thread" target="8" />
+      <module name="java-thread" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
